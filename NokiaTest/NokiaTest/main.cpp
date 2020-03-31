@@ -1,15 +1,15 @@
 #include "Header.h"
 
-void PrimeNum(size_t N,vector<int>* primeVector) //поиск N первых простых чисел перебором делителей
+void PrimeNum(size_t N,vector<int>* primeVector) //РїРѕРёСЃРє N РїРµСЂРІС‹С… РїСЂРѕСЃС‚С‹С… С‡РёСЃРµР» РїРµСЂРµР±РѕСЂРѕРј РґРµР»РёС‚РµР»РµР№
 {
-	long int primeStart=2; //начинаем проверять на простоту с двойки
+	long int primeStart=2; //РЅР°С‡РёРЅР°РµРј РїСЂРѕРІРµСЂСЏС‚СЊ РЅР° РїСЂРѕСЃС‚РѕС‚Сѓ СЃ РґРІРѕР№РєРё
 	bool primeFlag;
 
 	while(N)
 	{
 		primeFlag=true;
 
-		for(long int j = 2; j <= sqrt(primeStart); j++) // оптимизированный поиск делителей с помощью sqrt
+		for(long int j = 2; j <= sqrt(primeStart); j++) // РѕРїС‚РёРјРёР·РёСЂРѕРІР°РЅРЅС‹Р№ РїРѕРёСЃРє РґРµР»РёС‚РµР»РµР№ СЃ РїРѕРјРѕС‰СЊСЋ sqrt
 		{
 			if(primeStart%j == 0)
 			{
@@ -30,7 +30,7 @@ void PrimeNum(size_t N,vector<int>* primeVector) //поиск N первых простых чисел 
 	
 }
 
-map<int, int> NumWords(string* text) //функция подсчитывает количество слов одинаково длины
+map<int, int> NumWords(string* text) //С„СѓРЅРєС†РёСЏ РїРѕРґСЃС‡РёС‚С‹РІР°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃР»РѕРІ РѕРґРёРЅР°РєРѕРІРѕ РґР»РёРЅС‹
 {
 	vector<string> wordsVector;
 	string::iterator startWord=text->begin();
@@ -41,11 +41,11 @@ map<int, int> NumWords(string* text) //функция подсчитывает количество слов один
 		if(*searchWord == ' ')
 		{
 			wordsVector.push_back(string(startWord,searchWord));
-			startWord=searchWord+1; // НЕ захватываем пробел
+			startWord=searchWord+1; // РќР• Р·Р°С…РІР°С‚С‹РІР°РµРј РїСЂРѕР±РµР»
 		}
 
 		if(searchWord+1==text->end()) 
-			wordsVector.push_back(string(startWord,searchWord+1)); // если дальше конец текста, не теряем последний символ 
+			wordsVector.push_back(string(startWord,searchWord+1)); // РµСЃР»Рё РґР°Р»СЊС€Рµ РєРѕРЅРµС† С‚РµРєСЃС‚Р°, РЅРµ С‚РµСЂСЏРµРј РїРѕСЃР»РµРґРЅРёР№ СЃРёРјРІРѕР» 
 
 		++searchWord;
 	}
@@ -54,7 +54,7 @@ map<int, int> NumWords(string* text) //функция подсчитывает количество слов один
 	
 	for (size_t i=0;i<wordsVector.size();i++)
 	{
-		wordsMap[wordsVector[i].size()]++; // наращаваем счетчик для каждой длины 
+		wordsMap[wordsVector[i].size()]++; // РЅР°СЂР°С‰Р°РІР°РµРј СЃС‡РµС‚С‡РёРє РґР»СЏ РєР°Р¶РґРѕР№ РґР»РёРЅС‹ 
 	}
 
 	return wordsMap;
