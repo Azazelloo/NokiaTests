@@ -36,7 +36,7 @@ map<int, int> NumWords(string* text) //функция подсчитывает �
 	string::iterator startWord=text->begin();
 	string::iterator searchWord=text->begin();
 
-	while(searchWord != text->end())
+	while(searchWord != text->end()) //парсим принятый string в вектор string'ов, посимвольно
 	{
 		if(*searchWord == ' ')
 		{
@@ -50,21 +50,47 @@ map<int, int> NumWords(string* text) //функция подсчитывает �
 		++searchWord;
 	}
 
-	map<int, int> wordsMap;
+	map<int, int> wordsMap; //результирующий map, где индекс - количество букв в слове, значение - количество слов
 	
 	for (size_t i=0;i<wordsVector.size();i++)
 	{
-		wordsMap[wordsVector[i].size()]++; // наращаваем счетчик для каждой длины 
+		wordsMap[wordsVector[i].size()]++; // наращиваем счетчик для каждой длины 
 	}
 
 	return wordsMap;
 }
 
+MaxAndMinStruct& BitShift(unsigned long num) //с использованием bitset
+{
+	MaxAndMinStruct retStruct;
+
+	/*минимум*/
+	for(size_t i=0;i<bitset<32>(num).count();i++)
+	{
+		retStruct.min=bitset<32>(retStruct.min).flip(i).to_ulong();
+	}
+
+	/*максимум*/
+	for(size_t i=0;i<bitset<32>(num).count();i++)
+	{
+		retStruct.max=bitset<32>(retStruct.max).flip(31-i).to_ulong();
+	}
+
+	return retStruct;
+}
+
 int main()
 {
+	/*задача 1*/
+	vector<int> v;
+	PrimeNum(10,&v);
+
+	/*задача 2*/
 	string text="ab ab ab abc abcd abcd rgfeegeerg a a a  b b b";
 	map<int, int> m=NumWords(&text);
 
-
-		return 0;
+	/*задача 3*/
+	MaxAndMinStruct result=BitShift(0x00000006);
+	
+	return 0;
 }
