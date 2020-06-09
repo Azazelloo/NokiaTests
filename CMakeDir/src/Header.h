@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include <bitset>
+#include <sstream>
 
 #define	  stop __asm nop
 using namespace std;
@@ -14,6 +15,6 @@ struct MaxAndMinStruct
 	unsigned long max=0;
 };
 
-void PrimeNum(size_t N,vector<int>* primeVector);
-map<int,int> NumWords(string* text);
-void BitShift(MaxAndMinStruct& retStruct, unsigned long num);
+void SieveOfEratosthenes(size_t N,vector<int>* primeVector);
+map<int,int> NumWords(string text);
+MaxAndMinStruct& BitShift(unsigned long num);
