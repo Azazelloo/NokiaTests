@@ -1,0 +1,4 @@
+﻿  main.cpp
+c:\users\azazello\desktop\nokiatests-master\nokiatest\nokiatest\main.cpp(31): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+c:\users\azazello\desktop\nokiatests-master\nokiatest\nokiatest\main.cpp(52): warning C4172: returning address of local variable or temporary: retStruct
+  NokiaTest.vcxproj -> C:\Users\Azazello\Desktop\NokiaTests-master\NokiaTest\x64\Debug\NokiaTest.exe

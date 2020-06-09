@@ -1,61 +1,34 @@
 #include "Header.h"
 
-void PrimeNum(size_t N,vector<int>* primeVector) //поиск N первых простых чисел перебором делителей
+void SieveOfEratosthenes(size_t n,vector<int>* primeVector) //поиск простых чисел до n с помощью сита Эратосфена
 {
-	long int primeStart=2; //начинаем проверять на простоту с двойки
-	bool primeFlag;
+	vector<int> isPrime(n + 1, true);
+	isPrime[0] = false;
+	isPrime[1] = false;
 
-	while(N)
-	{
-		primeFlag=true;
-
-		for(long int j = 2; j <= sqrt(primeStart); j++) // оптимизированный поиск делителей с помощью sqrt
+	for (int i = 2; i*i <= n; i++)
+	{ 
+		if (isPrime[i])
 		{
-			if(primeStart%j == 0)
-			{
-				primeFlag=false;
-				++primeStart;
-				break;
-			}
+			for (int j = i * i; j <= n; j += i) //возможное улучшение: i*i вместо 2*i
+				isPrime[j] = false;
 		}
-
-		if(primeFlag)
-		{
-			primeVector->push_back(primeStart);
-			++primeStart;
-			--N;
-		}	
 	}
 
-	
+	for (int i = 0; i <= n; i++)
+	{
+		if (isPrime[i])
+			primeVector->push_back(i);
+	}
 }
 
-map<int, int> NumWords(string* text) //функция подсчитывает количество слов одинаково длины
+map<int,int> NumWords(string text) //функция подсчитывает количество слов одинаково длины
 {
-	vector<string> wordsVector;
-	string::iterator startWord=text->begin();
-	string::iterator searchWord=text->begin();
+	stringstream ss(text);
+	map<int, int> wordsMap;
 
-	while(searchWord != text->end()) //парсим принятый string в вектор string'ов, посимвольно
-	{
-		if(*searchWord == ' ')
-		{
-			wordsVector.push_back(string(startWord,searchWord));
-			startWord=searchWord+1; // НЕ захватываем пробел
-		}
-
-		if(searchWord+1==text->end()) 
-			wordsVector.push_back(string(startWord,searchWord+1)); // если дальше конец текста, не теряем последний символ 
-
-		++searchWord;
-	}
-
-	map<int, int> wordsMap; //результирующий map, где индекс - количество букв в слове, значение - количество слов
-	
-	for (size_t i=0;i<wordsVector.size();i++)
-	{
-		wordsMap[wordsVector[i].size()]++; // наращиваем счетчик для каждой длины 
-	}
+	for (string words; ss >> words;)
+		wordsMap[words.size()]++;
 
 	return wordsMap;
 }
@@ -83,13 +56,13 @@ int main()
 {
 	/*задача 1*/
 	vector<int> v;
-	PrimeNum(10,&v);
+	SieveOfEratosthenes(30,&v);
 
 	/*задача 2*/
 	string text="ab ab ab abc abcd abcd rgfeegeerg a a a  b b b";
-	map<int, int> m=NumWords(&text);
+	map<int,int> m=NumWords(text);
 
-	/*задача 3*/
+	///*задача 3*/
 	MaxAndMinStruct result=BitShift(0x00000006);
 	
 	return 0;
